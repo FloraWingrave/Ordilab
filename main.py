@@ -481,12 +481,13 @@ import math
 def formatmaking(character, level):
     tgb = f"『𝙻𝙴𝚅𝙴𝙻 {level}』"
 
-    # DAMAGE SCALING (+0.5 per level, game-style rounding)
-    dmg_bonus = math.floor(0.5 * (level - 1) + 0.5)
+    # DAMAGE SCALING (floor to avoid upper drift)
+    dmg_min = int(character['dmg'][0]) + math.floor(0.5 * (level - 1))
     if len(character['dmg']) >= 2:
-        yfg = f"{int(character['dmg'][0]) + dmg_bonus} - {int(character['dmg'][-1]) + dmg_bonus}"
+        dmg_max = int(character['dmg'][-1]) + math.floor(0.5 * (level - 1))
+        yfg = f"{dmg_min}-{dmg_max}"
     else:
-        yfg = f"{int(character['dmg'][0]) + dmg_bonus}"
+        yfg = f"{dmg_min}"
 
     # RARITY
     yhn = '✪' * int(character['star'])
@@ -516,8 +517,8 @@ def formatmaking(character, level):
     # STAT SCALING
     hp = character['hp'] + 3 * (level - 1)
 
-    # SPEED scaling (automatic, derived from original system, rounded)
-    speed_growth = 75 / 14  # matches original example, gives level 15 ~ +75 speed
+    # SPEED scaling (per-character, exact)
+    speed_growth = character.get('speed_growth', 5)  # default for old characters
     speed = round(character['speed'] + speed_growth * (level - 1))
 
     mnb = morede[character['class']]
