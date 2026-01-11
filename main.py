@@ -476,11 +476,13 @@ morede = {
     "Support":"⤷ **Strong against:** `None`\n⤷ **Weak against:** `None`"}
 tyme = time.time()
 
+import math
+
 def formatmaking(character, level):
     tgb = f"『𝙻𝙴𝚅𝙴𝙻 {level}』"
 
-    # DAMAGE SCALING (+0.5 per level)
-    dmg_bonus = round(0.5 * (level - 1))
+    # DAMAGE SCALING (+0.5 per level, game-style rounding)
+    dmg_bonus = math.floor(0.5 * (level - 1) + 0.5)
     if len(character['dmg']) >= 2:
         yfg = f"{int(character['dmg'][0]) + dmg_bonus} - {int(character['dmg'][-1]) + dmg_bonus}"
     else:
@@ -512,11 +514,11 @@ def formatmaking(character, level):
         txt += f"⤷ Combo Skill: {character['ab3']}\n"
 
     # STAT SCALING
-    hp = int(character['hp']) + (3 * (level - 1))
+    hp = character['hp'] + 3 * (level - 1)
 
-    # Speed scaling derived automatically (no extra key needed)
-    speed_growth = 75 / 14  # ≈ 5.35 per level
-    speed = int(character['speed'] + speed_growth * (level - 1))
+    # SPEED scaling (automatic, derived from original system, rounded)
+    speed_growth = 75 / 14  # matches original example, gives level 15 ~ +75 speed
+    speed = round(character['speed'] + speed_growth * (level - 1))
 
     mnb = morede[character['class']]
 
