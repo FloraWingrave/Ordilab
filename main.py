@@ -594,8 +594,8 @@ async def info_command(event):
         oih = True
         if int(msg[1]) <= 1:
             level = 1
-        elif int(msg[1]) >= 15:
-            level = 15
+        elif int(msg[1]) >= 11:
+            level = 11
         else:
             level = int(msg[1])
     else:
