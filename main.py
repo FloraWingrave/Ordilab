@@ -9,7 +9,7 @@ import time
 import os
 import random
 
-token = os.environ.get('TOKEN', None)
+token = os.environ.get('TOKEN', "8569080825:AAFhXvePxQnyV8p9zKEefIrEKmHLNqByYZ4")
 client = TelegramClient('brudhgvmf6', api_id=3344739, api_hash='88d43ee045dd90660b4360ba59fe3c48').start(bot_token=token)
 
 correction = ['Amon', 'Kotaro', 'Biscuit', 'Krueger', 'Djino', 'Ghatokaca', 'Gladranox', 'Gon', 'Freecss',
