@@ -477,69 +477,69 @@ morede = {
 tyme = time.time()
 
 def formatmaking(character, level):
-tgb = f"『𝙻𝙴𝚅𝙴𝙻 {level}』"
+    tgb = f"『𝙻𝙴𝚅𝙴𝙻 {level}』"
+    
+    if len(character['dmg']) >=2:
+        yfg = f"Between {int(character['dmg'][0])+round(0.3*(level-1))} to {int(character['dmg'][-1])+round(0.3*(level-1))}"
+    else:
+        yfg = f"{int(character['dmg'][0])+round(0.3*(level-1))}"
+    yhn = '✪' * int(character['star'])
+    
+    if character['series'] == 'Original':
+        ser = "〖Ordinal Legacy〗"
+    if character['series'] == 'hxh':
+        ser = "〖Hunter X Hunter〗"
+    if character['series'] == 'tg':
+        ser = "〖Tokyo Ghoul〗"
+    if character['series'] == 'sao':
+        ser = "〖Sword Art Online〗"
+    if character['series'] == 'ds':
+        ser = "〖Demon Slayer〗"
+    if character['series'] == 'opm':
+        ser = "〖One Punch Man〗"
+    if character['series'] == 'jjk':
+        ser = "〖Jujutsu Kaisen〗"
+    if character['series'] == 'aot':
+        ser = "〖Attack on Titan〗"
+    txt = ""
+    if character['ab1'] is None:
+        pass
+    else:
+        txt += f"⤷ **Skill**: `{character['ab1']}`\n"
+    if character['ab2'] is None:
+        pass
+    else:
+        txt += f"**⤷ Lead Skill**: `{character['ab2']}`\n"
+    if character['ab3'] is None:
+        pass
+    else:
+        txt += f"**⤷ Combo Skill**: `{character['ab3']}`\n"
 
-if len(character['dmg']) >=2:
-yfg = f"Between {int(character['dmg'][0])+round(0.3*(level-1))} to {int(character['dmg'][-1])+round(0.3*(level-1))}"
-else:
-yfg = f"{int(character['dmg'][0])+round(0.3*(level-1))}"
-yhn = '✪' * int(character['star'])
+    mnb = morede[character['class']]
+    text=f"""
+**『INFO』**
+⤷ **Name:**[ ]({character['img']}) `{character['name']}`
+⤷ **Rarity:** `{yhn}`
+⤷ **Job:** `{character['class']}`
+⤷ **Race:** `{character['race']}`
+⤷ **Series:** `{ser}`
 
-if character['series'] == 'Original':
-ser = "〖Ordinal Legacy〗"
-if character['series'] == 'hxh':
-ser = "〖Hunter X Hunter〗"
-if character['series'] == 'tg':
-ser = "〖Tokyo Ghoul〗"
-if character['series'] == 'sao':
-ser = "〖Sword Art Online〗"
-if character['series'] == 'ds':
-ser = "〖Demon Slayer〗"
-if character['series'] == 'opm':
-ser = "〖One Punch Man〗"
-if character['series'] == 'jjk':
-ser = "〖Jujutsu Kaisen〗"
-if character['series'] == 'aot':
-ser = "〖Attack on Titan〗"
-txt = ""
-if character['ab1'] is None:
-pass
-else:
-txt += f"⤷ Skill: {character['ab1']}\n"
-if character['ab2'] is None:
-pass
-else:
-txt += f"⤷ Lead Skill: {character['ab2']}\n"
-if character['ab3'] is None:
-pass
-else:
-txt += f"⤷ Combo Skill: {character['ab3']}\n"
+**{tgb}**
+⤷ **HP:** `{int(character['hp'])+(3*(level-1))}`
+⤷ **Speed:** `{int(character['speed'])+(5*(level-1))}`
+⤷ **Dmg:** `{yfg}`
 
-mnb = morede[character['class']]
-text=f"""
-
-『INFO』
-⤷ Name:  {character['name']}
-⤷ Rarity: {yhn}
-⤷ Job: {character['class']}
-⤷ Race: {character['race']}
-⤷ Series: {ser}
-
-{tgb}
-⤷ HP: {int(character['hp'])+(3*(level-1))}
-⤷ Speed: {int(character['speed'])+(5*(level-1))}
-⤷ Dmg: {yfg}
-
-『DUALITY』
+**『DUALITY』**
 {mnb}
 
-『ABILITES』
+**『ABILITES』**
 {txt}
 
-『ABOUT』
-{character['description']}
+
+**『ABOUT』**
+`{character['description']}`
 """
-return text
+    return text
 
 strtimg = 'https://i.ibb.co/gjRM25X/image.png'
 
@@ -552,9 +552,9 @@ async def start(event):
 @client.on(events.NewMessage(pattern='/start'))
 async def start(event):
     if event.is_private:
-        await event.reply("""Welcome to Ordinal Legacy Lab Bot
+        await event.reply("""Welcome to Ordinal Legacy Bot
 
-We're here to give info about the Ordinal Legacy bot.""", file=strtimg)
+We're here to give info about the Ordinal Legacy Bot.""", file=strtimg)
     else:
         uptime = get_readable_time((time.time() - tyme))
         await event.reply(f'`Alive since {uptime}`')
