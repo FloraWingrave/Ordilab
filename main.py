@@ -547,17 +547,14 @@ strtimg = 'https://i.ibb.co/gjRM25X/image.png'
 async def start(event):
         await event.reply("""
 ✦ Made Using [Telethon](https://docs.telethon.dev/en/stable/)
-✦ Source Code [here](https://github.com/CUSTOMFAIL/Ordilab)
-✦ Coder/Whole Work: [Nagi](https://t.me/Nagi_X_Seishiro)
-✦ Data/Lolicon : [Billy](https://t.me/wancoins)
-✦ Owner/Free Credits: [Obito](https://t.me/Shadow_Iord)""",link_preview=False)
+""",link_preview=False)
 
 @client.on(events.NewMessage(pattern='/start'))
 async def start(event):
     if event.is_private:
-        await event.reply("""Welcome to ORDILAB Bot
+        await event.reply("""Welcome to Ordinal Legacy Lab Bot
 
-We're here to give info about the Ordinal legeacy bot.""", file=strtimg)
+We're here to give info about the Ordinal Legacy bot.""", file=strtimg)
     else:
         uptime = get_readable_time((time.time() - tyme))
         await event.reply(f'`Alive since {uptime}`')
@@ -597,8 +594,8 @@ async def info_command(event):
         oih = True
         if int(msg[1]) <= 1:
             level = 1
-        elif int(msg[1]) >= 11:
-            level = 11
+        elif int(msg[1]) >= 15:
+            level = 15
         else:
             level = int(msg[1])
     else:
