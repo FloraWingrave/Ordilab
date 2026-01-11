@@ -480,7 +480,7 @@ def formatmaking(character, level):
     tgb = f"『𝙻𝙴𝚅𝙴𝙻 {level}』"
     
     if len(character['dmg']) >=2:
-        yfg = f"Between {int(character['dmg'][0])+round(0.3*(level-1))} to {int(character['dmg'][-1])+round(0.5*(level-1))}"
+        yfg = f"Between {int(character['dmg'][0])+round(0.3*(level-1))} to {int(character['dmg'][-1])+round(0.3*(level-2))}"
     else:
         yfg = f"{int(character['dmg'][0])+round(0.3*(level-1))}"
     yhn = '✪' * int(character['star'])
@@ -526,7 +526,7 @@ def formatmaking(character, level):
 
 **{tgb}**
 ⤷ **HP:** `{int(character['hp'])+(3*(level-1))}`
-⤷ **Speed:** `{int(character['speed'])+(10*(level-1))}`
+⤷ **Speed:** `{int(character['speed'])+(5*(level-2))}`
 ⤷ **Dmg:** `{yfg}`
 
 **『DUALITY』**
