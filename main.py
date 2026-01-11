@@ -513,7 +513,10 @@ def formatmaking(character, level):
 
     # STAT SCALING
     hp = int(character['hp']) + (3 * (level - 1))
-    speed = int(character['speed']) + int(character['speed_growth'] * (level - 1))
+
+    # Speed scaling derived automatically (no extra key needed)
+    speed_growth = 75 / 14  # ≈ 5.35 per level
+    speed = int(character['speed'] + speed_growth * (level - 1))
 
     mnb = morede[character['class']]
 
