@@ -481,15 +481,16 @@ import math
 def formatmaking(character, level):
     tgb = f"『𝙻𝙴𝚅𝙴𝙻 {level}』"
 
-    # DAMAGE SCALING (floor to avoid upper drift)
-    dmg_min = int(character['dmg'][0]) + math.floor(0.5 * (level - 1))
+    # DAMAGE SCALING (floor min/max to prevent overshoot)
     if len(character['dmg']) >= 2:
+        dmg_min = int(character['dmg'][0]) + math.floor(0.5 * (level - 1))
         dmg_max = int(character['dmg'][-1]) + math.floor(0.5 * (level - 1))
         yfg = f"{dmg_min}-{dmg_max}"
     else:
+        dmg_min = int(character['dmg'][0]) + math.floor(0.5 * (level - 1))
         yfg = f"{dmg_min}"
 
-    # RARITY
+    # RARITY STARS
     yhn = '✪' * int(character['star'])
 
     # SERIES
@@ -515,11 +516,11 @@ def formatmaking(character, level):
         txt += f"⤷ Combo Skill: {character['ab3']}\n"
 
     # STAT SCALING
-    hp = character['hp'] + 3 * (level - 1)
+    hp = int(character['hp']) + 3 * (level - 1)
 
-    # SPEED scaling (per-character, exact)
-    speed_growth = character.get('speed_growth', 5)  # default for old characters
-    speed = round(character['speed'] + speed_growth * (level - 1))
+    # SPEED: precise growth, rounded to nearest integer
+    speed_growth = character.get('speed_growth', 5)  # optional per character
+    speed = round(int(character['speed']) + speed_growth * (level - 1))
 
     mnb = morede[character['class']]
 
@@ -534,7 +535,7 @@ def formatmaking(character, level):
 {tgb}
 ⤷ HP: {hp}
 ⤷ Speed: {speed}
-⤷ Damage: {yfg}
+⤷ Dmg: {yfg}
 
 『DUALITY』
 {mnb}
